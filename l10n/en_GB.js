@@ -37,7 +37,7 @@ OC.L10N.register(
     "Subscribe" : "Subscribe",
     "Got more awesome feeds? Share them with us!" : "Got more awesome feeds? Share them with us!",
     "No articles available" : "No articles available",
-    "No unread articles available" : "No unread articles available 2",
+    "No unread articles available" : "No unread articles available",
     "Open website" : "Open website",
     "Star article" : "Star article",
     "Unstar article" : "Unstar article",
