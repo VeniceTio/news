@@ -53,5 +53,9 @@ app.controller('ExploreController', function (sites, $rootScope, FeedResource, S
         $location.url('/explore/?lang=' + languageCode);
     };
 
+    this.shareOnTwitter = function (data) {
+        console.log(data);
+    }
+
     this.selectedLanguageCode = this.getCurrentLanguageCode();
 });
