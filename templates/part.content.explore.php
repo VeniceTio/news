@@ -44,7 +44,7 @@
                     </button>
                 </div>
                 <div>
-                    <button ng-click="Explore.shareOnTwitter(entry)">
+                    <button ng-click="Explore.shareOnTwitter(entry.feed)">
                         Share on twitter
                     </button>
                 </div>
