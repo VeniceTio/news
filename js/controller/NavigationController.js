@@ -336,6 +336,10 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
         FolderResource.delete(folder.name);
     };
 
+    this.shareFolder = function (folder) {
+        console.log('test partage dossier :' + folder.name);
+    };
+
     this.setOrdering = function (feed, ordering) {
         FeedResource.patch(feed.id, {ordering: ordering});
         $route.reload();
