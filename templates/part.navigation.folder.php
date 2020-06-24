@@ -113,6 +113,12 @@
                 </button>
             </li>
             <li>
+                <button ng-click="Navigation.shareFolder(folder.id)">
+                    <span class="icon-shared"></span>
+                    <span><?php p($l->t('Share')); ?></span>
+                </button>
+            </li>
+            <li>
                 <button ng-click="folder.editing=true">
                     <span class="icon-rename"></span>
                     <span><?php p($l->t('Rename')); ?></span>
