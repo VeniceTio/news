@@ -54,8 +54,8 @@ app.controller('ExploreController', function (sites, $rootScope, FeedResource, S
     };
 
     this.shareOnTwitter = function (data) {
-        console.log("test");
-    }
+        console.log("Test");
+    };
 
     this.selectedLanguageCode = this.getCurrentLanguageCode();
 });
