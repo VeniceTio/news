@@ -24,6 +24,7 @@ app.directive('appNavigationEntryUtils', function () {
                 .find('.app-navigation-entry-utils-menu-button button');
 
             button.click(function () {
+                console.log('test directive :');
                 menu.toggleClass('open');
             });
 
