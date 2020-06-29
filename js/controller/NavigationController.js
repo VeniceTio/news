@@ -334,7 +334,6 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
     this.deleteFolder = function (folder) {
         FeedResource.deleteFolder(folder.id);
         FolderResource.delete(folder.name);
-        console.log('test sppr dossier :' + folder.name);
     };
 
     this.shareFolder = function (folder) {
