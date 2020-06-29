@@ -6,7 +6,7 @@ app.directive('ShareOnTwitter', function ($rootScope, $timeout) {
     return {
         restrict: 'A',
         link: function (scope, elem) {
-            $rootScope.$on('ShareOnTwitter', function (events, args) {
+            $rootScope.$on('shareOnTwitter', function (events, args) {
 
                 console.log(event);
             });
