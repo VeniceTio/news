@@ -342,9 +342,9 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
         console.log('test partage dossier :' + folder.name);
     };
 
-    this.tryShareFolder = function (folder) {
+    this.tryShareFolder = function () {
         this.sharing = false;
-        console.log('test2 partage dossier :' + folder.name);
+        console.log('test2 partage dossier :');
     };
 
     this.setOrdering = function (feed, ordering) {
