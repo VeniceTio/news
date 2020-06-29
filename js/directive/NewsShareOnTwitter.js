@@ -1,11 +1,9 @@
 
 
-app.directive('ShareOnTwitter', function ($rootScope, $timeout) {
-    'use strict';
+app.directive('newsShareOnTwitter', function ($rootScope, $timeout) {
 
     return {
-        restrict: 'A',
-        link: function (scope, elem) {
+        function (scope, elem) {
             $rootScope.$on('shareOnTwitter', function (events, args) {
 
                 console.log("Un essai");
