@@ -131,10 +131,10 @@
                 </button>
             </li>
         </ul>
-        <div ng-show="Navigation.sharing">
-            <p>Vous voulez partager votre dossier</p>
-            <button ng-click="Navigation.tryShareFolder()">try</button>
-        </div>
+    </div>
+    <div ng-show="Navigation.sharing">
+        <p>Vous voulez partager votre dossier</p>
+        <button ng-click="Navigation.tryShareFolder()">try</button>
     </div>
 
     <ul ng-hide="folder.error || folder.deleted">
