@@ -131,7 +131,12 @@
                 </button>
             </li>
         </ul>
+        <div ng-show="Navigation.sharing">
+            <p>Vous voulez partager votre dossier</p>
+            <button ng-click="Navigation.tryShareFolder()">try</button>
+        </div>
     </div>
+
     <ul ng-hide="folder.error || folder.deleted">
         <?php print_unescaped(
             $this->inc('part.navigation.feed', ['folderId' => 'folder.id'])

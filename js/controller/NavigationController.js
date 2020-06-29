@@ -20,6 +20,7 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
     this.renameError = '';
     this.feed = {};
     this.youtubeDetectorRegex = new RegExp(/youtube\.[a-z\.]{2,}\/(user|channel)\/(.*?)(\/|\?|$)/);
+    this.sharing = false;
 
     var getRouteId = function () {
         return parseInt($route.current.params.id, 10);
@@ -337,7 +338,13 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
     };
 
     this.shareFolder = function (folder) {
+        this.sharing = true;
         console.log('test partage dossier :' + folder.name);
+    };
+
+    this.tryShareFolder = function (folder) {
+        this.sharing = false;
+        console.log('test2 partage dossier :' + folder.name);
     };
 
     this.setOrdering = function (feed, ordering) {
