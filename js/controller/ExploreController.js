@@ -29,7 +29,6 @@ app.controller('ExploreController', function (sites, $rootScope, FeedResource, S
 
     this.subscribeTo = function (location) {
         $rootScope.$broadcast('addFeed', location);
-        console.log("dernier test");
     };
 
     this.isCategoryShown = function (data) {
