@@ -24,7 +24,7 @@ app.directive('newsAddFeed', function ($rootScope, $timeout) {
                     }
                     elem.find('[ng-model="Navigation.feed.url"]').focus();
                 });
-
+                console.log("test");
                 scope.Navigation.feed.url = url;
             });
         }
