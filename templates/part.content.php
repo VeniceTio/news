@@ -157,7 +157,7 @@
 
             <div>
                 <a class="twitter-share-button"
-                    href="https://twitter.com/intent/tweet?text=Hello%20world">
+                    ng-href="https://twitter.com/intent/tweet?text={{ item.title }}">
                     Tweet</a>
             </div>
         </li>
