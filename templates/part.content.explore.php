@@ -43,11 +43,6 @@
                         <?php p($l->t('Subscribe')) ?>
                     </button>
                 </div>
-                <div class="explore-subscribe">
-                    <button ng-click="Explore.shareOnTwitter()">
-                        Share on twitter
-                    </button>
-                </div>
             </div>
         </div>
     </div>

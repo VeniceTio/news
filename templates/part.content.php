@@ -151,7 +151,14 @@
                 <div class="enclosure description" ng-if="item.mediaDescription" news-bind-html-unsafe="item.mediaDescription"></div>
 
                 <div class="body" news-bind-html-unsafe="item.body" ng-attr-dir="{{item.rtl && 'rtl'}}"></div>
+                
+                
+            </div>
 
+            <div>
+            <a class="twitter-share-button"
+                href="https://twitter.com/intent/tweet?text=Hello%20world">
+            Tweet</a>
             </div>
         </li>
     </ul>
