@@ -156,9 +156,10 @@
             </div>
 
             <div>
-            <a class="twitter-share-button"
-                href="https://twitter.com/intent/tweet?text=Hello%20world">
-            Tweet</a>
+                <a class="twitter-share-button"
+                    href="https://twitter.com/intent/tweet?text=Hello%20world">
+                    Tweet</a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
         </li>
     </ul>
