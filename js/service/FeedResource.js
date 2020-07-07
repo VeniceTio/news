@@ -343,5 +343,16 @@ app.factory('FeedResource', function (Resource, $http, BASE_URL, $q) {
     };
 
 
+    FeedResource.prototype.adaptText = function (text) {
+        var textReturn = text.substring(0,279);
+        var i = textReturn.length;
+        while(textReturn[i] != ' ' && i < 276)
+        {
+            textReturn = textReturn.slice(textReturn.length);
+        }
+        textReturn.push('.','.','.');
+        return textReturn;
+    }
+
     return new FeedResource($http, BASE_URL, $q);
 });
