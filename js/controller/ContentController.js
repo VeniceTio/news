@@ -216,4 +216,16 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
     };
 
     this.activeItem = this.getFirstItem();
+
+    //Form adapting to share on another platforms, like twitter.
+    this.adaptTextTo = function (text) {
+        var textReturn = text.substring(0,279);
+        var i = textReturn.length;
+        while(textReturn[i] != ' ' && i < 276)
+        {
+            textReturn = textReturn.slice(textReturn.length);
+        }
+        textReturn.push('.','.','.');
+        return textReturn;
+    }
 });
