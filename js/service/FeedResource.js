@@ -18,6 +18,7 @@ app.factory('FeedResource', function (Resource, $http, BASE_URL, $q) {
         this.folderUnreadCount = {};
         this.folderIds = {};
         this.$q = $q;
+        this.sendingText = "Test ?";
     };
 
     FeedResource.prototype = Object.create(Resource.prototype);
@@ -344,14 +345,15 @@ app.factory('FeedResource', function (Resource, $http, BASE_URL, $q) {
 
 
     FeedResource.prototype.adaptText = function (text) {
-        var textReturn = text.substring(0,279);
+        /*var textReturn = text.substring(0,279);
         var i = textReturn.length;
         while(textReturn[i] != ' ' && i < 276)
         {
             textReturn = textReturn.slice(textReturn.length);
         }
         textReturn.push('.','.','.');
-        return textReturn;
+        return textReturn;*/
+        return this.sendingText;
     }
 
     return new FeedResource($http, BASE_URL, $q);

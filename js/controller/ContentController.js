@@ -215,10 +215,10 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
         }
     };
 
-    this.activeItem = this.getFirstItem();
-
     //Form adapting to share on another platforms, like twitter.
     this.adaptTextTo = function (text) {
         return FeedResource.adaptTextTo(text);
     }
+
+    this.activeItem = this.getFirstItem();
 });
