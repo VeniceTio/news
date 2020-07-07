@@ -155,10 +155,10 @@
                 
             </div>
 
-            <div ng-controller="ContentController as cont">
+            <div>
                 <a class="twitter-share-button"
-                    ng-href="https://twitter.com/intent/tweet?text={{ cont.adaptTextTo(item.body)}}">
-                    Tweet {{ cont.adaptTextTo() }}</a>
+                    ng-href="https://twitter.com/intent/tweet?text={{ ::Content.adaptTextTo(item.body)}}">
+                    Tweet {{ ::Content.adaptTextTo() }}</a>
             </div>
         </li>
     </ul>
