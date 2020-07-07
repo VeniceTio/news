@@ -201,6 +201,13 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
         }
     };
 
+    //Form adapting to share on another platforms, like twitter.
+    this.adaptTextTo = function (text) {
+        //return FeedResource.adaptText(text);
+        var test = "test";
+        return test;
+    }
+
     this.refresh = function () {
         $route.reload();
     };
@@ -214,12 +221,6 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
             return undefined;
         }
     };
-
-    //Form adapting to share on another platforms, like twitter.
-    this.adaptTextTo = function (text) {
-        //return FeedResource.adaptText(text);
-        return "oskur";
-    }
 
     this.activeItem = this.getFirstItem();
 });
