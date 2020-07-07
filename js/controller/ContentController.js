@@ -202,11 +202,11 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
     };
 
     //Form adapting to share on another platforms, like twitter.
-    this.adaptTextTo = function (text) {
+    this.adaptTextTo = function () {
         //return FeedResource.adaptText(text);
-        var test = "test";
+        var test = 'test';
         return test;
-    }
+    };
 
     this.refresh = function () {
         $route.reload();

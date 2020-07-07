@@ -56,7 +56,7 @@ gulp.task('default', gulp.series('lint', () => {
         .pipe(ngAnnotate())
         .pipe(sourcemaps.init())
         .pipe(concat(buildTarget))
-        //.pipe(terser())
+        .pipe(terser())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(destinationFolder));
 }));
