@@ -158,7 +158,7 @@
             <div>
                 <a class="twitter-share-button"
                     ng-href="https://twitter.com/intent/tweet?text={{ ::Content.adaptTextTo(item.body)}}">
-                    Tweet {{ ::Content.adaptTextTo() }}</a>
+                    Tweet {{ item.body }}</a>
             </div>
         </li>
     </ul>
