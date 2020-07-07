@@ -217,7 +217,8 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
 
     //Form adapting to share on another platforms, like twitter.
     this.adaptTextTo = function (text) {
-        return FeedResource.adaptText(text);
+        //return FeedResource.adaptText(text);
+        return "oskur";
     }
 
     this.activeItem = this.getFirstItem();
