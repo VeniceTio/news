@@ -115,7 +115,7 @@
             <li>
                 <button ng-click="Navigation.shareFolder(folder.id)">
                     <span class="icon-shared"></span>
-                    <span><?php p($l->t('Share')); ?></span>
+                    <span><?php p($l->t('Share')); ?>{{Navigation.sharing}}</span>
                 </button>
             </li>
             <li>
@@ -132,7 +132,7 @@
             </li>
         </ul>
     </div>
-    <a ng-show="sharing">
+    <a ng-show="Navigation.sharing">
         <p>Vous voulez partager votre dossier</p>
         <button ng-click="Navigation.tryShareFolder()">try</button>
     </a>
