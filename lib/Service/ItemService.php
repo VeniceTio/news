@@ -176,6 +176,37 @@ class ItemService extends Service
 
 
     /**
+     * share or unshare an item
+     *
+     * @param  int     $feedId    the id of the item's feed that should be starred
+     * @param  string  $guidHash  the guidHash of the item that should be starred
+     * @param  boolean $isShared if true the item will be marked as starred,
+     *                            if false unstar
+     * @param  string  $userId    the name of the user for security reasons
+     * @throws ServiceNotFoundException if the item does not exist
+     */
+    public function share($feedId, $guidHash, $isShared, $userId)
+    {
+        try {
+            /**
+             * @var Item $item
+             */
+            $item = $this->itemMapper->findByGuidHash(
+                $guidHash,
+                $feedId,
+                $userId
+            );
+
+            $item->setShared($isShared);
+
+            $this->itemMapper->update($item);
+        } catch (DoesNotExistException $ex) {
+            throw new ServiceNotFoundException($ex->getMessage());
+        }
+    }
+
+
+    /**
      * Read or unread an item
      *
      * @param  int     $itemId the id of the item that should be read

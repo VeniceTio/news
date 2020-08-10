@@ -193,6 +193,53 @@ class ItemApiController extends ApiController
     }
 
 
+    private function setShared($isShared, $feedId, $guidHash)
+    {
+        try {
+            $this->itemService->share(
+                $feedId,
+                $guidHash,
+                $isShared,
+                $this->getUserId()
+            );
+        } catch (ServiceNotFoundException $ex) {
+            return $this->error($ex, Http::STATUS_NOT_FOUND);
+        }
+
+        return [];
+    }
+
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     * @CORS
+     *
+     * @param int    $feedId
+     * @param string $guidHash
+     * @return array|\OCP\AppFramework\Http\JSONResponse
+     */
+    public function share($feedId, $guidHash)
+    {
+        return $this->setShared(true, $feedId, $guidHash);
+    }
+
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     * @CORS
+     *
+     * @param int    $feedId
+     * @param string $guidHash
+     * @return array|\OCP\AppFramework\Http\JSONResponse
+     */
+    public function unshare($feedId, $guidHash)
+    {
+        return $this->setShared(false, $feedId, $guidHash);
+    }
+
+
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
