@@ -61,6 +61,8 @@ class Item extends Entity implements IAPI, \JsonSerializable
     protected $unread = false;
     /** @var bool */
     protected $starred = false;
+    /** @var bool */
+    protected $shared = false;
 
     /**
      * @return int
@@ -93,6 +95,7 @@ class Item extends Entity implements IAPI, \JsonSerializable
         $item->setRtl($import['rtl']);
         $item->setUnread($import['unread']);
         $item->setStarred($import['starred']);
+        $item->setShared($import['shared']);
 
         return $item;
     }
@@ -243,6 +246,11 @@ class Item extends Entity implements IAPI, \JsonSerializable
         return $this->starred;
     }
 
+    public function isShared()
+    {
+        return $this->shared;
+    }
+
     public function isUnread()
     {
         return $this->unread;
@@ -270,6 +278,7 @@ class Item extends Entity implements IAPI, \JsonSerializable
             'feedId' => $this->getFeedId(),
             'unread' => $this->isUnread(),
             'starred' => $this->isStarred(),
+            'shared' => $this->isShared(),
             'lastModified' => $this->getLastModified(),
             'rtl' => $this->getRtl(),
             'intro' => $this->getIntro(),
@@ -419,6 +428,14 @@ class Item extends Entity implements IAPI, \JsonSerializable
         }
     }
 
+    public function setShared(bool $shared)
+    {
+        if ($this->shared !== $shared) {
+            $this->shared = $shared;
+            $this->markFieldUpdated('shared');
+        }
+    }
+
     public function setTitle(string $title = null)
     {
         $title = strip_tags($title);
@@ -475,6 +492,7 @@ class Item extends Entity implements IAPI, \JsonSerializable
             'feedId' => $this->getFeedId(),
             'unread' => $this->isUnread(),
             'starred' => $this->isStarred(),
+            'shared' => $this->isShared(),
             'lastModified' => $this->cropApiLastModified(),
             'rtl' => $this->getRtl(),
             'fingerprint' => $this->getFingerprint(),
@@ -498,6 +516,7 @@ class Item extends Entity implements IAPI, \JsonSerializable
             'mediaDescription' => $this->getMediaDescription(),
             'unread' => $this->isUnread(),
             'starred' => $this->isStarred(),
+            'shared' => $this->isShared(),
             'feedLink' => $feeds['feed' . $this->getFeedId()]->getLink(),
             'rtl' => $this->getRtl(),
         ];

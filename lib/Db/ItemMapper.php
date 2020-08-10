@@ -125,6 +125,26 @@ class ItemMapper extends NewsMapper
         return (int)$result['size'];
     }
 
+    public function sharedCount($userId)
+    {
+        $sql = 'SELECT COUNT(*) AS size FROM `*PREFIX*news_items` `items` ' .
+            'JOIN `*PREFIX*news_feeds` `feeds` ' .
+            'ON `feeds`.`id` = `items`.`feed_id` ' .
+            'AND `feeds`.`deleted_at` = 0 ' .
+            'AND `feeds`.`user_id` = ? ' .
+            'AND `items`.`shared` = ? ' .
+            'LEFT OUTER JOIN `*PREFIX*news_folders` `folders` ' .
+            'ON `folders`.`id` = `feeds`.`folder_id` ' .
+            'WHERE `feeds`.`folder_id` = 0 ' .
+            'OR `folders`.`deleted_at` = 0';
+
+        $params = [$userId, true];
+
+        $result = $this->execute($sql, $params)->fetch();
+
+        return (int)$result['size'];
+    }
+
 
     public function readAll($highestItemId, $time, $userId)
     {
