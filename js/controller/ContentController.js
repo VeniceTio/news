@@ -52,6 +52,10 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
         ItemResource.toggleStar(itemId);
     };
 
+    this.toggleShare = function (itemId) {
+        ItemResource.toggleShare(itemId);
+    };
+
     this.toggleItem = function (item) {
         // TODO: unittest
         if (this.isCompactView()) {

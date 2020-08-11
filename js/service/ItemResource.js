@@ -37,6 +37,10 @@ app.factory('ItemResource', function (Resource, $http, BASE_URL, ITEM_BATCH_SIZE
                 this.starredCount = value;
                 break;
 
+            case 'shared':
+                this.sharedCount = value;
+                break;
+
             default:
                 var self = this;
                 var importValues = [];
@@ -108,6 +112,32 @@ app.factory('ItemResource', function (Resource, $http, BASE_URL, ITEM_BATCH_SIZE
         });
     };
 
+    ItemResource.prototype.share = function (itemId, isShared) {
+        if (isShared === undefined) {
+            isShared = true;
+        }
+
+        var it = this.get(itemId);
+        var url = this.BASE_URL +
+            '/items/' + it.feedId + '/' + it.guidHash + '/share';
+
+        it.shared = isShared;
+
+        if (isShared) {
+            this.sharedCount += 1;
+        } else {
+            this.sharedCount -= 1;
+        }
+
+        return this.http({
+            url: url,
+            method: 'POST',
+            data: {
+                isShared: isShared
+            }
+        });
+    };
+
 
     ItemResource.prototype.toggleStar = function (itemId) {
         if (this.get(itemId).starred) {
@@ -115,6 +145,19 @@ app.factory('ItemResource', function (Resource, $http, BASE_URL, ITEM_BATCH_SIZE
         } else {
             this.star(itemId, true);
         }
+    };
+
+
+    ItemResource.prototype.toggleShare = function (itemId) {
+        let message;
+        if (this.get(itemId).shared) {
+            this.share(itemId, false);
+            message = false;
+        } else {
+            this.share(itemId, true);
+            message = true;
+        }
+        //console.log('item n°: '+ itemId + '\nshared : ' + message);
     };
 
 
