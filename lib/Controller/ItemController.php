@@ -122,6 +122,8 @@ class ItemController extends Controller
                 $params['feeds'] = $this->feedService->findAll($this->userId);
                 $params['starred'] =
                     $this->itemService->starredCount($this->userId);
+                $params['shared'] =
+                    $this->itemService->sharedCount($this->userId);
             }
 
             $params['items'] = $this->itemService->findAll(
@@ -168,6 +170,8 @@ class ItemController extends Controller
             $params['feeds'] = $this->feedService->findAll($this->userId);
             $params['starred'] =
                 $this->itemService->starredCount($this->userId);
+            $params['shared'] =
+                $this->itemService->sharedCount($this->userId);
             $params['items'] = $this->itemService->findAllNew(
                 $id,
                 $type,
@@ -200,6 +204,30 @@ class ItemController extends Controller
                 $feedId,
                 $guidHash,
                 $isStarred,
+                $this->userId
+            );
+        } catch (ServiceException $ex) {
+            return $this->error($ex, Http::STATUS_NOT_FOUND);
+        }
+
+        return [];
+    }
+
+    /**
+     * @NoAdminRequired
+     *
+     * @param int    $feedId
+     * @param string $guidHash
+     * @param bool   $isStarred
+     * @return array|\OCP\AppFramework\Http\JSONResponse
+     */
+    public function share($feedId, $guidHash, $isShared)
+    {
+        try {
+            $this->itemService->share(
+                $feedId,
+                $guidHash,
+                $isShared,
                 $this->userId
             );
         } catch (ServiceException $ex) {

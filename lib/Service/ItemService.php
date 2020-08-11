@@ -180,8 +180,8 @@ class ItemService extends Service
      *
      * @param  int     $feedId    the id of the item's feed that should be starred
      * @param  string  $guidHash  the guidHash of the item that should be starred
-     * @param  boolean $isShared if true the item will be marked as starred,
-     *                            if false unstar
+     * @param  boolean $isShared if true the item will be marked as shared,
+     *                            if false unshare
      * @param  string  $userId    the name of the user for security reasons
      * @throws ServiceNotFoundException if the item does not exist
      */
@@ -319,6 +319,17 @@ class ItemService extends Service
     public function starredCount($userId)
     {
         return $this->itemMapper->starredCount($userId);
+    }
+
+    /**
+     * Returns the starred count
+     *
+     * @param  string $userId the name of the user
+     * @return int the count
+     */
+    public function sharedCount($userId)
+    {
+        return $this->itemMapper->sharedCount($userId);
     }
 
 
