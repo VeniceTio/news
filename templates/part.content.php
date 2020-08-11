@@ -88,6 +88,18 @@
                             ?>">
                         </button>
                     </li>
+                    <li ng-click="Content.toggleShare(item.id)"
+                        class="util"
+                        news-stop-propagation>
+                        <button class="icon-shared"
+                                ng-hide="item.shared"
+                                title="<?php p($l->t('Share article')); ?>">
+                        </button>
+                        <button class="icon-shared"
+                                ng-show="item.shared"
+                                title="<?php p($l->t('Unshare article')); ?>">
+                        </button>
+                    </li>
                     <li class="util more" news-stop-propagation ng-hide="noPlugins">
                         <button class="icon-more" news-toggle-show="#actions-{{item.id}}"></button>
                         <div class="article-actions" id="actions-{{item.id}}">
@@ -151,8 +163,8 @@
                 <div class="enclosure description" ng-if="item.mediaDescription" news-bind-html-unsafe="item.mediaDescription"></div>
 
                 <div class="body" news-bind-html-unsafe="item.body" ng-attr-dir="{{item.rtl && 'rtl'}}"></div>
-                
-                
+
+
             </div>
 
             <div>
