@@ -50,6 +50,7 @@ return ['routes' => [
 ['name' => 'item#read', 'url' => '/items/{itemId}/read', 'verb' => 'POST'],
 ['name' => 'item#read_multiple', 'url' => '/items/read/multiple', 'verb' => 'POST'],
 ['name' => 'item#star', 'url' => '/items/{feedId}/{guidHash}/star', 'verb' => 'POST'],
+['name' => 'item#share', 'url' => '/items/{feedId}/{guidHash}/share', 'verb' => 'POST'],
 
 // export
 ['name' => 'export#opml', 'url' => '/export/opml', 'verb' => 'GET'],
@@ -97,5 +98,7 @@ return ['routes' => [
 ['name' => 'item_api#unstar', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/unstar', 'verb' => 'PUT'], // FIXME: POST would be more correct
 ['name' => 'item_api#star_multiple', 'url' => '/api/v1-2/items/star/multiple', 'verb' => 'PUT'], // FIXME: POST would be more correct
 ['name' => 'item_api#unstar_multiple', 'url' => '/api/v1-2/items/unstar/multiple', 'verb' => 'PUT'], // FIXME: POST would be more correct
+['name' => 'item_api#share', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/share', 'verb' => 'PUT'],
+['name' => 'item_api#unshare', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/unshare', 'verb' => 'PUT'],
 
 ]];
