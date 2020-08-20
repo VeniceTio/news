@@ -218,7 +218,7 @@ class ItemController extends Controller
      *
      * @param int    $feedId
      * @param string $guidHash
-     * @param bool   $isStarred
+     * @param bool   $isShared
      * @return array|\OCP\AppFramework\Http\JSONResponse
      */
     public function share($feedId, $guidHash, $isShared)
@@ -227,8 +227,7 @@ class ItemController extends Controller
             $this->itemService->share(
                 $feedId,
                 $guidHash,
-                $isShared,
-                $this->userId
+                $isShared
             );
         } catch (ServiceException $ex) {
             return $this->error($ex, Http::STATUS_NOT_FOUND);

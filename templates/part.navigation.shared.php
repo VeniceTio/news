@@ -11,8 +11,8 @@
     <div class="app-navigation-entry-utils" ng-show="Navigation.isSharedUnread()">
         <ul>
             <li class="app-navigation-entry-utils-counter"
-                ng-show="Navigation.isSharedUnread()"
-                title="{{ Navigation.getSharedCount() }}">
+                ng-show="Navigation.isSharedUnread()">
+                <title="{{ Navigation.getSharedCount() }}">
                 {{ Navigation.getSharedCount() | unreadCountFormatter }}
             </li>
         </ul>

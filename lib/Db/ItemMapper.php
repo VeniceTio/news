@@ -134,14 +134,14 @@ class ItemMapper extends NewsMapper
             'JOIN `*PREFIX*news_feeds` `feeds` ' .
             'ON `feeds`.`id` = `items`.`feed_id` ' .
             'AND `feeds`.`deleted_at` = 0 ' .
-            'AND `feeds`.`user_id` = ? ' .
             'AND `items`.`shared` = ? ' .
+            'AND `user_id` = ? ' .
             'LEFT OUTER JOIN `*PREFIX*news_folders` `folders` ' .
             'ON `folders`.`id` = `feeds`.`folder_id` ' .
             'WHERE `feeds`.`folder_id` = 0 ' .
             'OR `folders`.`deleted_at` = 0';
 
-        $params = [$userId, true];
+        $params = [true, $userId];
 
         $result = $this->execute($sql, $params)->fetch();
 
@@ -352,6 +352,23 @@ class ItemMapper extends NewsMapper
         );
 
         return $this->findEntity($sql, [$userId, $guidHash, $feedId]);
+    }
+
+    public function findAllByGuidHash($guidHash, $feedId)
+    {
+        $sql = 'SELECT `items`.* FROM `*PREFIX*news_items` `items` ' .
+        'JOIN `*PREFIX*news_feeds` `feeds` ' .
+        'ON `feeds`.`id` = `items`.`feed_id` ' .
+        'AND `feeds`.`deleted_at` = 0 ' .
+        'AND `items`.`guid_hash` = ? ' .
+        'AND `feeds`.`id` = ? ' .
+        'LEFT OUTER JOIN `*PREFIX*news_folders` `folders` ' .
+        'ON `folders`.`id` = `feeds`.`folder_id` ' .
+        'WHERE `feeds`.`folder_id` = 0 ' .
+        'OR `folders`.`deleted_at` = 0 ' .
+        'ORDER BY `items`.`id` DESC';
+
+        return $this->findEntity($sql, [$guidHash, $feedId]);
     }
 
 
