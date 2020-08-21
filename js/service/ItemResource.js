@@ -157,7 +157,11 @@ app.factory('ItemResource', function (Resource, $http, BASE_URL, ITEM_BATCH_SIZE
             this.share(itemId, true);
             message = true;
         }
-        //console.log('item n°: '+ itemId + '\nshared : ' + message);
+        console.log('item n°: '+ itemId + '\nshared : ' + message);
+    };
+
+    ItemResource.prototype.getOne = function (itemId) {
+        return this.get(itemId);
     };
 
 

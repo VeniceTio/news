@@ -14,6 +14,7 @@
 namespace OCA\News\Service;
 
 use OCA\News\Db\Item;
+use OCA\News\Db\ItemShare;
 use OCP\IConfig;
 use OCP\AppFramework\Db\DoesNotExistException;
 
@@ -21,6 +22,7 @@ use OCA\News\Db\ItemMapper;
 use OCA\News\Db\FeedType;
 use OCA\News\Config\Config;
 use OCA\News\Utility\Time;
+use OCA\News\Utility\PsrLogger;
 
 class ItemService extends Service
 {
@@ -28,6 +30,7 @@ class ItemService extends Service
     private $config;
     private $timeFactory;
     private $itemMapper;
+    private $itemShareMapper;
     private $systemConfig;
 
     public function __construct(
@@ -73,6 +76,8 @@ class ItemService extends Service
                     $showAll,
                     $userId
                 );
+            case FeedType::SHARED:
+                return $this->itemMapper->findAllNewShareItems();
             default:
                 return $this->itemMapper->findAllNew(
                     $updatedSince,
@@ -130,6 +135,8 @@ class ItemService extends Service
                     $userId,
                     $search
                 );
+            case FeedType::SHARED:
+                return $this->itemMapper->findAllShareItems();
             default:
                 return $this->itemMapper->findAll(
                     $limit,
@@ -178,23 +185,32 @@ class ItemService extends Service
     /**
      * share or unshare an item
      *
-     * @param  int     $feedId    the id of the item's feed that should be starred
-     * @param  string  $guidHash  the guidHash of the item that should be starred
-     * @param  boolean $isShared if true the item will be marked as shared,
+     * @param int $feedId the id of the item's feed that should be starred
+     * @param string $guidHash the guidHash of the item that should be starred
+     * @param boolean $isShared if true the item will be marked as shared,
      *                            if false unshare
+     * @param  string  $userId   the name of the user for security reasons
      * @throws ServiceNotFoundException if the item does not exist
      */
-    public function share($feedId, $guidHash, $isShared)
+    public function share($feedId, $guidHash, $isShared, $userId)
     {
         try {
             /**
              * @var Item $item
              */
-            $item = $this->itemMapper->findAllByGuidHash(
+            $item = $this->itemMapper->findByGuidHash(
                 $guidHash,
-                $feedId
+                $feedId,
+                $userId
             );
 
+            //$this->itemMapper->share($isShared,$item->getTitle());
+            if($isShared) {
+                $this->itemShareMapper->insert(ItemShare::fromImport(['title' => $item->getTitle(), 'grpId' => $item->getId()]));
+            }else {
+                $itemshare = $this->itemShareMapper->findByTitle($item->getTitle());
+                $this->itemShareMapper->delete($itemshare);
+            }
             $item->setShared($isShared);
 
             $this->itemMapper->update($item);

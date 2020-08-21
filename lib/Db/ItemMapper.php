@@ -130,20 +130,11 @@ class ItemMapper extends NewsMapper
 
     public function sharedCount($userId)
     {
-        $sql = 'SELECT COUNT(*) AS size FROM `*PREFIX*news_items` `items` ' .
-            'JOIN `*PREFIX*news_feeds` `feeds` ' .
-            'ON `feeds`.`id` = `items`.`feed_id` ' .
-            'AND `feeds`.`deleted_at` = 0 ' .
-            'AND `items`.`shared` = ? ' .
-            'AND `user_id` = ? ' .
-            'LEFT OUTER JOIN `*PREFIX*news_folders` `folders` ' .
-            'ON `folders`.`id` = `feeds`.`folder_id` ' .
-            'WHERE `feeds`.`folder_id` = 0 ' .
-            'OR `folders`.`deleted_at` = 0';
+        $sql = 'SELECT COUNT(*) AS size FROM `*PREFIX*news_items_share` `items` ';
 
-        $params = [true, $userId];
+        //$params = [true, $userId];
 
-        $result = $this->execute($sql, $params)->fetch();
+        $result = $this->execute($sql)->fetch();
 
         return (int)$result['size'];
     }
@@ -341,6 +332,29 @@ class ItemMapper extends NewsMapper
         $sql = 'AND (`items`.`unread` = ? OR `items`.`starred` = ?) ';
         $sql = $this->makeSelectQuery($sql);
         return $this->findEntities($sql, $params);
+    }
+
+    public function findAllShareItems(){
+        $sql = 'SELECT `items`.* FROM `*PREFIX*news_items_share` `share` ' .
+            'JOIN `*PREFIX*news_items` `items` ' .
+            'ON `share`.`title` = `items`.`title` ' .
+            'ORDER BY `items`.`id` DESC';
+
+        return $this->findEntity($sql);
+    }
+
+    public function share($isShared,$title){
+        var_dump($isShared);
+        if($isShared) {
+            $sql = 'INSERT INTO `*PREFIX*news_items_share`' .
+                'VALUES ?';
+
+        } else {
+            $sql = 'DELETE FROM `*PREFIX*news_items_share` `item`' .
+                'WHERE `item`.`title` = ?';
+        }
+
+        $this->execute($sql, $title);
     }
 
 

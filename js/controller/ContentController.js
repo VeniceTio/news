@@ -9,11 +9,12 @@
  */
 app.controller('ContentController', function (Publisher, FeedResource, ItemResource, SettingsResource, data, $route,
                                               $routeParams, $location, FEED_TYPE, ITEM_AUTO_PAGE_SIZE, Loading,
-                                              $filter) {
+                                              $filter, ItemShareResource) {
     'use strict';
 
     var self = this;
     ItemResource.clear();
+    ItemShareResource.clear();
 
     // distribute data to models based on key
     Publisher.publishAll(data);
@@ -39,6 +40,9 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
     this.getItems = function () {
         return ItemResource.getAll();
     };
+    this.getItemsShare = function () {
+        return ItemShareResource.getAll();
+    };
 
     this.isItemActive = function (id) {
         return this.activeItem === id;
@@ -52,7 +56,8 @@ app.controller('ContentController', function (Publisher, FeedResource, ItemResou
         ItemResource.toggleStar(itemId);
     };
 
-    this.toggleShare = function (itemId) {
+    this.toggleShare = function (itemId,shared) {
+        ItemShareResource.toggleShare(ItemResource.getOne(itemId),shared);
         ItemResource.toggleShare(itemId);
     };
 

@@ -16,7 +16,7 @@
         <span title="Mark Read" class="icon-checkmark"></span>
     </button>
 
-    <ul>
+    <ul ng-if="!Navigation.isSharedActive()">
         <li class="item {{ ::Content.getFeed(item.feedId).cssClass }}"
             ng-repeat="item in Content.getItems() |
                 orderBy:[Content.orderBy()] track by item.id"
@@ -88,7 +88,7 @@
                             ?>">
                         </button>
                     </li>
-                    <li ng-click="Content.toggleShare(item.id)"
+                    <li ng-click="Content.toggleShare(item.id,item.shared)"
                         class="util"
                         news-stop-propagation>
                         <button class="icon-shared"
@@ -172,6 +172,105 @@
                     ng-href="https://twitter.com/intent/tweet?text={{ Content.adaptTextTo(item.title)}}">
                     Tweet {{ item.body }} </a>
                     <p>{{ Content.getFeed(item.feedId).body }}</p>
+            </div>
+        </li>
+    </ul>
+    <ul ng-if="Navigation.isSharedActive()">
+        <li class="item {{ ::Content.getFeed(item.feedId).cssClass }}"
+            ng-repeat="item in Content.getItemsShare() |
+                orderBy:[Content.orderBy()] track by item.id"
+            data-id="{{ ::item.id }}">
+
+            <div class="utils" ng-click="Content.toggleItem(item)">
+                <ul>
+                    <li class="util-spacer"></li>
+                    <li class="util only-in-compact">
+                        <a class="external icon-link"
+                           target="_blank"
+                           rel="noreferrer"
+                           ng-href="{{ ::item.url }}"
+                           title="<?php p($l->t('Open website')) ?>"
+                           news-stop-propagation>
+                        </a>
+                    </li>
+                    <li class="title only-in-compact">
+                        <h1><a>{{ ::item.title }} <span class="intro">{{ ::item.intro }}</span></a></h1>
+                    </li>
+                    <li class="only-in-compact">
+                        <time class="date"
+                              title="{{ item.pubDate*1000 |
+                                            date:'yyyy-MM-dd HH:mm:ss' }}"
+                              datetime="{{ item.pubDate*1000 |
+                                            date:'yyyy-MM-ddTHH:mm:ssZ' }}">
+                            {{ Content.getRelativeDate(item.pubDate) }}
+                        </time>
+                    </li>
+                    <li class="util more" news-stop-propagation ng-hide="noPlugins">
+                        <button class="icon-more" news-toggle-show="#actions-{{item.id}}"></button>
+                        <div class="article-actions" id="actions-{{item.id}}">
+                            <ul news-article-actions="item" no-plugins="noPlugins"></ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="article" ng-if="!Content.isCompactView() || item.show">
+
+                <div class="heading only-in-expanded">
+                    <time class="date"
+                          title="{{ item.pubDate*1000 |
+                            date:'yyyy-MM-dd HH:mm:ss' }}"
+                          datetime="{{ item.pubDate*1000 |
+                            date:'yyyy-MM-ddTHH:mm:ssZ' }}">
+                        {{ Content.getRelativeDate(item.pubDate) }}
+                    </time>
+                    <h1>
+                        <a class="external"
+                           target="_blank"
+                           rel="noreferrer"
+                           ng-href="{{ ::item.url }}"
+                           title="{{ ::item.title }}">
+                            {{ ::item.title }}
+                        </a>
+                    </h1>
+                </div>
+
+                <div class="subtitle">
+                    <span class="author" ng-show="item.author">
+                        <?php p($l->t('by')) ?> {{ ::item.author }}
+                    </span>
+                </div>
+
+                <div class="enclosure" ng-if="Content.getMediaType(item.enclosureMime) == 'audio'">
+                    <button ng-click="App.play(item)"><?php p($l->t('Play audio')) ?></button>
+                    <a class="button" ng-href="{{ item.enclosureLink|trustUrl }}" target="_blank" rel="noreferrer">
+                        <?php p($l->t('Download audio')) ?>
+                    </a>
+                </div>
+                <div class="enclosure" ng-if="Content.getMediaType(item.enclosureMime) == 'video'">
+                    <video controls preload="none" news-play-one ng-src="{{ item.enclosureLink|trustUrl }}" type="{{ item.enclosureMime }}">
+                    </video>
+                    <a class="button" ng-href="{{ item.enclosureLink|trustUrl }}" target="_blank" rel="noreferrer">
+                        <?php p($l->t('Download video')) ?>
+                    </a>
+                </div>
+
+                <div class="enclosure thumbnail" ng-if="item.mediaThumbnail">
+                    <a ng-href="{{ ::item.enclosureLink }}"><img ng-src="{{ item.mediaThumbnail|trustUrl }}" alt="" /></a>
+                </div>
+
+                <div class="enclosure description" ng-if="item.mediaDescription" news-bind-html-unsafe="item.mediaDescription"></div>
+
+                <div class="body" news-bind-html-unsafe="item.body"></div>
+
+
+            </div>
+
+            <div>
+                <a class="twitter-share-button"
+                   ng-href="https://twitter.com/intent/tweet?text={{ Content.adaptTextTo(item.title)}}">
+                    Tweet {{ item.body }} </a>
+                <p>{{ Content.getFeed(item.feedId).body }}</p>
             </div>
         </li>
     </ul>

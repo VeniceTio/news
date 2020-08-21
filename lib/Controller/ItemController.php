@@ -227,7 +227,8 @@ class ItemController extends Controller
             $this->itemService->share(
                 $feedId,
                 $guidHash,
-                $isShared
+                $isShared,
+                $this->userId
             );
         } catch (ServiceException $ex) {
             return $this->error($ex, Http::STATUS_NOT_FOUND);

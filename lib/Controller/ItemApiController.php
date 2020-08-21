@@ -199,7 +199,8 @@ class ItemApiController extends ApiController
             $this->itemService->share(
                 $feedId,
                 $guidHash,
-                $isShared
+                $isShared,
+                $this->getUserId()
             );
         } catch (ServiceNotFoundException $ex) {
             return $this->error($ex, Http::STATUS_NOT_FOUND);

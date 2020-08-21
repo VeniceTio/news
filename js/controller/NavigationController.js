@@ -8,7 +8,8 @@
  * @copyright Bernhard Posselt 2014
  */
 app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource, FolderResource, ItemResource,
-                                                 SettingsResource, Publisher, $rootScope, $location, $q) {
+                                                 SettingsResource,ItemShareResource, Publisher, $rootScope,
+                                                 $location, $q) {
     'use strict';
 
     this.feedError = '';
@@ -21,6 +22,7 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
     this.feed = {};
     this.youtubeDetectorRegex = new RegExp(/youtube\.[a-z\.]{2,}\/(user|channel)\/(.*?)(\/|\?|$)/);
     this.sharing = false;
+    this.itemShare = false;
 
     var getRouteId = function () {
         return parseInt($route.current.params.id, 10);
@@ -358,6 +360,10 @@ app.controller('NavigationController', function ($route, FEED_TYPE, FeedResource
     this.tryShareFolder = function () {
         this.sharing = false;
         console.log('test2 partage dossier :');
+    };
+
+    this.switchMode = function (bool) {
+        this.itemShare = bool;
     };
 
     this.setOrdering = function (feed, ordering) {

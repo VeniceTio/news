@@ -4,7 +4,7 @@
     }"
     class="subscriptions-feed with-counter with-menu">
 
-    <a class="icon-shared" ng-href="#/items/shared/" >
+    <a class="icon-shared" ng-href="#/items/shared/" ng-click="Navigation.switchMode(true)">
        <?php p($l->t('share by admin'))?>
     </a>
 

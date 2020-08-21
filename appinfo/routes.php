@@ -51,6 +51,13 @@ return ['routes' => [
 ['name' => 'item#read_multiple', 'url' => '/items/read/multiple', 'verb' => 'POST'],
 ['name' => 'item#star', 'url' => '/items/{feedId}/{guidHash}/star', 'verb' => 'POST'],
 ['name' => 'item#share', 'url' => '/items/{feedId}/{guidHash}/share', 'verb' => 'POST'],
+['name' => 'item#share', 'url' => '/items/share', 'verb' => 'GET'],
+
+// ItemShare
+['name' => 'item_share#index', 'url' => '/item_share/ItemShares', 'verb' => 'GET'],
+['name' => 'item_share#show', 'url' => '/item_share/ItemShare/{id}', 'verb' => 'GET'],
+['name' => 'item_share#create', 'url' => '/item_share/create', 'verb' => 'PUT'],
+['name' => 'item_share#destroy', 'url' => '/item_share/delete/{id}', 'verb' => 'DELETE'],
 
 // export
 ['name' => 'export#opml', 'url' => '/export/opml', 'verb' => 'GET'],
@@ -101,4 +108,8 @@ return ['routes' => [
 ['name' => 'item_api#share', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/share', 'verb' => 'PUT'],
 ['name' => 'item_api#unshare', 'url' => '/api/v1-2/items/{feedId}/{guidHash}/unshare', 'verb' => 'PUT'],
 
+['name' => 'itemShare_api#index', 'url' => '/api/v1-2/ItemShares', 'verb' => 'GET'],
+['name' => 'itemShare_api#update', 'url' => '/api/v1-2/items/updated', 'verb' => 'GET'],
+['name' => 'itemShare_api#share', 'url' => '/api/v1-2/ItemShares/{item}', 'verb' => 'POST'],
+['name' => 'itemShare_api#unshare', 'url' => '/api/v1-2/ItemShares/{item}', 'verb' => 'DELETE']
 ]];
